@@ -1,4 +1,12 @@
-''' Tabelas de dispersão por dispersão dupla (double-hashing) '''
+''' Tabelas de dispersão por dispersão dupla (double-hashing)
+
+    Exemplo para uma tabela de dimensão 11 sem redimensionamento (dens=1):
+    >>> from iaed.hashdbl import DblHash
+    >>> x = DblHash(size=11,dens=1)
+    >>> for n in (15,14,12,24,18,11,21,48,32):
+    >>>     x.insert(n)
+    >>> print(x)
+'''
 
 class DblHash:
     ''' Dispersão por dispersão dupla (double-hashing) '''

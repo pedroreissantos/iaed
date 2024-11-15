@@ -1,4 +1,14 @@
-''' Operações em árvores equilibradas AVL (Adelson-Velsky and Landis) '''
+''' Operações em árvores equilibradas AVL (Adelson-Velsky and Landis)
+
+    Exemplo:
+    >>> from iaed.avl import AVL
+    >>> t = AVL()
+    >>> for i in (15, 14, 12, 24, 18, 11, 21, 48, 32):
+    >>>     t.insert(i)
+    >>> t.preorder()
+    >>> t.remove(14)
+    >>> t.posorder()
+'''
 
 from iaed.btree import _node, Btree
 

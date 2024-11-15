@@ -1,4 +1,14 @@
-''' Operações em árvores binárias (não equilibradas) '''
+''' Operações em árvores de pesquisa binárias (BST) [não equilibradas]
+
+    Exemplo:
+    >>> from iaed.btree import Btree
+    >>> x = Btree()
+    >>> for i in (12, 6, 8, 16, 24, 7, 15, 2, 21):
+    >>>     x.insert(i)
+    >>> x.preorder()
+    >>> x.posorder()
+    >>> x.order()
+'''
 
 class _node:
     ''' Nó da árvore '''

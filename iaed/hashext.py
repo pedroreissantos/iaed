@@ -1,4 +1,12 @@
-''' Tabelas de dispersão por encadeamento externo (external-hashing) '''
+''' Tabelas de dispersão por encadeamento externo (external-hashing)
+
+    Exemplo para uma tabela de dimensão 11 sem redimensionamento (dens=1):
+    >>> from iaed.hashext import ExtHash
+    >>> x = ExtHash(size=11,dens=1)
+    >>> for n in (15,14,12,24,18,11,21,48,32):
+    >>>     x.insert(n)
+    >>> print(x)
+'''
 
 class ExtHash:
     ''' Dispersão por encadeamento externo '''

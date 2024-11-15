@@ -1,4 +1,12 @@
-''' Tabelas de dispersão por pesquisa linear (linear-probing) '''
+''' Tabelas de dispersão por pesquisa linear (linear-probing)
+
+    Exemplo para uma tabela de dimensão 11 sem redimensionamento (dens=1):
+    >>> from iaed.hashlin import LinHash
+    >>> x = LinHash(size=11,dens=1)
+    >>> for n in (15,14,12,24,18,11,21,48,32):
+    >>>     x.insert(n)
+    >>> print(x)
+'''
 
 class LinHash:
     ''' Dispersão por pesquisa linear '''

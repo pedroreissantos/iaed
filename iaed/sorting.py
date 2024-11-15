@@ -1,12 +1,28 @@
 #! /usr/bin/env python3
-''' Algoritmos de ordenação '''
+''' Algoritmos de ordenação
+
+
+    >>> from iaed import sorting
+    >>> v = [34, 3, 36, 11, 8, 4, 22, 20, 12]
+    >>> sorting.dbg = True # ver cada iterada
+    >>> sorting.selection(v)
+
+    Em algoritmos recursivos pode ser necessário aumentar o limite de recursão:
+    >>> from sys import setrecursionlimit
+    >>> setrecursionlimit(50000)
+'''
 from random import randint
 from timeit import timeit
 
-dbg = 0 # debug
+dbg = False # debug
+''' para cada iterada colocar a True '''
 
-def run(algorithm, array, pkg = '__main__') :
-    ''' Execução temporizada '''
+def run(algorithm, array, pkg = 'iaed.sorting') :
+    ''' Execução temporizada
+        >>> from iaed import sorting
+        >>> sorting.dbg = True # ver cada iterada
+        >>> sorting.run("bubble", sorting.mkarray(12,100))
+    '''
     return timeit(f"{algorithm}({array})",f"from {pkg} import {algorithm}", number=1)
 
 # from iaed.sorting import bubble
@@ -14,10 +30,30 @@ def run(algorithm, array, pkg = '__main__') :
 
 def mkarray(length, high=1000, low=0) :
     ''' Cria vetor com valores inteiros aleatórios '''
-    return [ randint(low, high) for i in range(length) ]
+    return [ randint(low, high) for _ in range(length) ]
+
+lower = 'abcdefghijklmnopqrstuvwxyz'
+upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+digit = '0123456789'
+hexdigit = '0123456789ABCDEF'
+charset = lower + upper + digit
+charspc = charset + ' '
+def rndstr(length, chars = charset):
+    ''' Cria uma cadeia de carateres com o comprimento dado (length)
+        constituída por carateres do conjunto dado (chars) '''
+    out = ''
+    for _ in range(length):
+        out += chars[randint(0,len(chars)-1)]
+    if out[0] == ' ' or out[-1] == ' ':
+        return rndstr(length, chars)
+    return out
+
+def mkstrvec(length, width, chars = charset):
+    ''' Cria um vetor de cadeias de carateres '''
+    return [ rndstr(width, chars) for _ in range(length) ]
 
 def bubble0(array) :
-    ''' Ordenação por borbulhamento '''
+    ''' Ordenação por borbulhamento (esq -> dir)'''
     n = len(array)
     for i in range(n) :
         for j in range(n - i - 1) : # left to right
@@ -28,7 +64,7 @@ def bubble0(array) :
     return array
 
 def bubble1(array) :
-    ''' Ordenação por borbulhamento invertido '''
+    ''' Ordenação por borbulhamento invertido (dir -> esq)'''
     n = len(array) -1
     for i in range(n) :
         for j in range(n, i, -1) : # right to left
@@ -39,7 +75,7 @@ def bubble1(array) :
     return array
 
 def bubble(array) :
-    ''' Ordenação por borbulhamento ótimizado '''
+    ''' Ordenação por borbulhamento ótimizado (esq -> dir)'''
     n = len(array)
     for i in range(n) :
         is_sorted = True
