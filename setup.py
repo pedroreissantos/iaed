@@ -12,7 +12,7 @@ import setuptools
 with open("README.md", encoding="utf8") as fh:
     readme = fh.read()
 
-setuptools.setup(name='iaed', # 'iaed-pkg-peresan',
+setuptools.setup(name='iaed',
 	version='1.0.2', # 1.0.3 test
 	author='Pedro Reis dos Santos',
 	author_email="reis.santos@tecnico.ulisboa.pt",
@@ -31,8 +31,6 @@ setuptools.setup(name='iaed', # 'iaed-pkg-peresan',
 		'Environment :: Console',
 	],
 	python_requires='>=3.6',
-	#install_requires=[ 'ply', ],
-	py_modules = ['iaed'], #['avl', 'btree', 'graph',
-        #'hashdbl', 'hashext', 'hashlin', 'sorting', 'search'],
+	py_modules = ['iaed'],
 	packages=setuptools.find_packages(),
 )

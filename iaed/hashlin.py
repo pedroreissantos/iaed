@@ -29,13 +29,13 @@ class LinHash:
         self._tab = [None] * self._size
         self._busy = 0
         for val in tab:
-            if val:
+            if val is not None:
                 self.insert(val)
 
     def insert(self, value):
         ''' Insere um elemento '''
         i = self._hashf(self._keyf(value)) % self._size
-        while self._tab[i]:
+        while self._tab[i] is not None:
             i = (i + 1) % self._size
         self._tab[i] = value
         self._busy += 1
@@ -45,16 +45,16 @@ class LinHash:
     def remove(self, value):
         ''' Remove um elemento '''
         i = self._hashf(self._keyf(value)) % self._size
-        while self._tab[i]:
+        while self._tab[i] is not None:
             if self._keyf(self._tab[i]) == self._keyf(value):
                 break
             i = (i + 1) % self._size
-        if not self._tab[i]:
+        if self._tab[i] is None:
             return
         self._tab[i] = None
         self._busy -= 1
         j = (i + 1) % self._size
-        while self._tab[j]:
+        while self._tab[j] is not None:
             item = self._tab[j]
             self._tab[j] = None
             self._busy -= 1
@@ -64,7 +64,7 @@ class LinHash:
     def search(self, key):
         ''' Procura um elemento '''
         i = self._hashf(key) % self._size
-        while self._tab[i]:
+        while self._tab[i] is not None:
             if self._keyf(self._tab[i]) == key:
                 return self._tab[i]
             i = (i + 1) % self._size
@@ -74,7 +74,7 @@ class LinHash:
         ''' Devolve a representação interna da tabela '''
         out = ''
         for i, val in enumerate(self._tab):
-            if not val:
+            if val is None:
                 continue
             out += str(i) + ': ' + str(val) + '\n'
         return out + str(self._size) + ', ' + str(self._busy) + ', ' + str(self._dens)

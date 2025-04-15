@@ -1,4 +1,12 @@
-''' Pesquisas em grafos '''
+''' Pesquisas em grafos
+
+    Exemplo:
+    >>> from iaed.graph import bfs, dfs
+    >>> gr3 = { 'A': ['B', 'C'], 'B': ['E'], 'C': ['B', 'F'],
+        'D': ['C', 'G'], 'E': ['F'], 'F': [], 'G': ['F'] }
+    >>> print(bfs(gr3, 'A'))
+    >>> print(dfs(gr3))
+'''
 def bfs(graph: dict, start: str) -> dict:
     ''' Travessia em largura num grafo '''
     out = { start: [0, None] } # node: [ distance, predecessor ]

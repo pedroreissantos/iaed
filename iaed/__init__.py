@@ -1,4 +1,4 @@
-# @(c) Pedro Reis dos Santos, IST Ulisboa, 2024
+# @(c) Pedro Reis dos Santos, IST Ulisboa, 2025
 """
 Introdução ao algoritmos e estruturas de dados
 
