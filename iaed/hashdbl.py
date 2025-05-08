@@ -34,14 +34,14 @@ class DblHash:
         self._tab = [None] * self._size
         self._busy = 0
         for val in tab:
-            if val:
+            if val is not None:
                 self.insert(val)
 
     def insert(self, value):
         ''' Insere um elemento '''
         i = self._hashf(self._keyf(value)) % self._size
         k = self._dbl(self._keyf(value))
-        while self._tab[i] and self._tab[i] != self.Del:
+        while self._tab[i] is not None and self._tab[i] != self.Del:
             i = (i + k) % self._size
         self._tab[i] = value
         self._busy += 1
@@ -52,12 +52,12 @@ class DblHash:
         ''' Remove um elemento '''
         i = self._hashf(self._keyf(value)) % self._size
         k = self._dbl(self._keyf(value))
-        while self._tab[i]:
+        while self._tab[i] is not None:
             if self._tab[i] != self.Del and \
                 self._keyf(self._tab[i]) == self._keyf(value):
                 break
             i = (i + k) % self._size
-        if self._tab[i]:
+        if self._tab[i] is not None:
             self._tab[i] = self.Del
             self._busy -= 1
 
@@ -65,7 +65,7 @@ class DblHash:
         ''' Procura um elemento '''
         i = self._hashf(key) % self._size
         k = self._dbl(key)
-        while self._tab[i]:
+        while self._tab[i] is not None:
             if self._tab[i] != self.Del and self._keyf(self._tab[i]) == key:
                 return self._tab[i]
             i = (i + k) % self._size
@@ -75,7 +75,7 @@ class DblHash:
         ''' Devolve a representação interna da tabela '''
         out = ''
         for i, val in enumerate(self._tab):
-            if not val:
+            if val is None:
                 continue
             out += str(i) + ': ' + str(val) + '\n'
         return out + str(self._size) + ', ' + str(self._busy) + ', ' + str(self._dens)
