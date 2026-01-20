@@ -272,6 +272,7 @@ def distcount2(a, M=1000) :
     return b
 
 # radixLSD([15,14,12,24,18,11,21,48,32],10,2,lambda x,y: int(str(x)[y]))
+# radixLSD(l2, 4, 3, lambda x,y: int(('0'*6+bin(x)[2:])[-6:][(y*2:(1+y)*2],2)) # 2 bits in 6 possible binary digits
 def radixLSD(a, M, bytesword, digit) :
     ''' Ordenação radix Least Significant Digit (LSD) first '''
     while bytesword > 0 :
@@ -281,7 +282,7 @@ def radixLSD(a, M, bytesword, digit) :
         for i in range(len(a)) :
             count[digit(a[i], bytesword) + 1] += 1
         for j in range(M) :
-            count[j] += count[j - 1]
+            count[j+1] += count[j]
         for i in range(len(a)) :
             aux[count[digit(a[i], bytesword)]] = a[i]
             count[digit(a[i], bytesword)] += 1
