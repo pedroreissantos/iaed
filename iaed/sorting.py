@@ -271,10 +271,16 @@ def distcount2(a, M=1000) :
         b[cnt[a[i]]] = a[i]
     return b
 
-# radixLSD([15,14,12,24,18,11,21,48,32],10,2,lambda x,y: int(str(x)[y]))
-# radixLSD(l2, 4, 3, lambda x,y: int(('0'*6+bin(x)[2:])[-6:][(y*2:(1+y)*2],2)) # 2 bits in 6 possible binary digits
 def radixLSD(a, M, bytesword, digit) :
-    ''' Ordenação radix Least Significant Digit (LSD) first '''
+    ''' Ordenação radix Least Significant Digit (LSD) first
+
+    sort a vector of two (2) decimal (10) digits:
+    radixLSD([15,14,12,24,18,11,21,48,32],10,2,lambda x,y: int(str(x)[y]))
+
+    sort a vector of integers upto 6-bits with 2-bits (4 possible values) at a time
+    (3-sets of 2-bits is a 6-bit number: between 0 and 63)
+    radixLSD(v, 4, 3, lambda x,y: int(('0'*6+bin(x)[2:])[-6:][(y*2:(1+y)*2],2))
+    '''
     while bytesword > 0 :
         bytesword -= 1
         count = [0] * (M + 1)
@@ -343,11 +349,16 @@ def insertion_sort(array, l=0, r=None):
     return array
 
 def radixMSD(a, l, r, w, bytesword, digit, M, ins=32) :
-    ''' Ordenação radix Most Significant Digit (MSD) first '''
+    ''' Ordenação radix Most Significant Digit (MSD) first
+
+    sort a vector of decimal values (M=10) with up to three (bytesword=3) digits:
+    v = [198, 981, 136, 448, 148, 445, 827, 442, 133]
+    radixMSD(v, 0, 8, 0, 3, lambda x, y: int(str(x)[y]), 10, ins=0)
+    '''
     def bin(x): return l+count[x]
     if r <= l: return a
-    if dbg: print('radix', l, 'to', r, '=', a[l:r+1])
-    if w > bytesword :
+    if dbg: print('radix:', w, 'digit from', l, 'to', r, '=', a[l:r+1])
+    oif w > bytesword :
         return a
     if r-l <= ins :
         insertion_sort(a, l, r)
