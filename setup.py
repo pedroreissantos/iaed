@@ -13,7 +13,7 @@ with open("README.md", encoding="utf8") as fh:
     readme = fh.read()
 
 setuptools.setup(name='iaed',
-	version='1.0.3', # 1.0.3 test
+	version='1.0.4', # 1.0.3 test
 	author='Pedro Reis dos Santos',
 	author_email="reis.santos@tecnico.ulisboa.pt",
 	description="IAED: Introduction to algorithms and data structures",

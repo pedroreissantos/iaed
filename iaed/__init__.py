@@ -15,6 +15,6 @@ Estruturas de dados: tabelas de dispersão (hashext, hashlin, hashdbl),
 
 __author__ = 'Pedro Reis dos Santos <reis.santos@tecnico.ulisboa.pt>'
 __web__ = 'https://github.com/pedroreissantos/iaed.git'
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 __all__ = ['search', 'sorting', 'hashext', 'hashlin', 'hashdbl',
         'btree', 'avl', 'graph', 'fib'] # visible modules within the package

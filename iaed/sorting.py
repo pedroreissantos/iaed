@@ -358,7 +358,7 @@ def radixMSD(a, l, r, w, bytesword, digit, M, ins=32) :
     def bin(x): return l+count[x]
     if r <= l: return a
     if dbg: print('radix:', w, 'digit from', l, 'to', r, '=', a[l:r+1])
-    oif w > bytesword :
+    if w > bytesword :
         return a
     if r-l <= ins :
         insertion_sort(a, l, r)
