@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """IAED: Introduction to algorithms and data structures
 search: linear and binary
-sorting: selection, insertion, bubble, shell, quick, merge, heap, counting, radix LSB/MSB and priority queue
+sorting: selection, insertion, bubble, shell, quick, merge, heap, counting, radix LSB/MSB and priority queues
 hash-tables: external, linear probing, double hashing
 tree: binary search, AVL
 graph: breadth transversal, depth transversal
@@ -13,7 +13,7 @@ with open("README.md", encoding="utf8") as fh:
     readme = fh.read()
 
 setuptools.setup(name='iaed',
-	version='1.0.2', # 1.0.3 test
+	version='1.0.3', # 1.0.3 test
 	author='Pedro Reis dos Santos',
 	author_email="reis.santos@tecnico.ulisboa.pt",
 	description="IAED: Introduction to algorithms and data structures",

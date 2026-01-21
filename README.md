@@ -6,4 +6,4 @@ IAED: Introduction to algorithms and data structures
 4. tree: binary search, AVL
 5. graph: breadth transversal, depth transversal
 
-&copy; Pedro Reis dos Santos, IST Ulisboa, 2024
+&copy; Pedro Reis dos Santos, IST Ulisboa, 2026
