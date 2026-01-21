@@ -252,7 +252,7 @@ def distcount(a, M=1000) :
     for i in range(len(a)) :
         cnt[a[i]+1] += 1
     for j in range(M) :
-        cnt[j] += cnt[j-1]
+        cnt[j+1] += cnt[j]
     for i in range(len(a)) :
         b[cnt[a[i]]] = a[i]
         cnt[a[i]] += 1
@@ -264,8 +264,8 @@ def distcount2(a, M=1000) :
     b = [0] * len(a)
     for i in range(len(a)) :
         cnt[a[i]] += 1
-    for j in range(M) :
-        cnt[j] += cnt[j-1]
+    for j in range(M-1) :
+        cnt[j+1] += cnt[j]
     for i in range(len(a)) :
         cnt[a[i]] -= 1
         b[cnt[a[i]]] = a[i]
@@ -344,26 +344,28 @@ def insertion_sort(array, l=0, r=None):
 
 def radixMSD(a, l, r, w, bytesword, digit, M, ins=32) :
     ''' Ordenação radix Most Significant Digit (MSD) first '''
+    def bin(x): return l+count[x]
+    if r <= l: return a
+    if dbg: print('radix', l, 'to', r, '=', a[l:r+1])
     if w > bytesword :
         return a
     if r-l <= ins :
         insertion_sort(a, l, r)
         return a
     count = [0] * (M + 1)
-    aux = [0] * len(a)
-    for i in range(len(a)) :
-        count[digit(a[i], w) + 1] += 1
+    aux = [0] * (r -l + 1)
+    for i in range(len(aux)) :
+        count[digit(a[l+i], w) + 1] += 1
     for j in range(M) :
-        count[j] = count[j-1]
-    for i in range(len(a)) :
-        aux[l + count[digit(a[i], w)]] = a[i]
-        count[digit(a[i], w)] += 1
-        a = list(aux)
-        radixMSD(a, l, bin(0)-1, w+1, bytesword, digit, M, ins)
-        for j in range(M-1) :
-            radixMSD(a, bin(j), bin(j+1)-1, w+1, bytesword, digit, M, ins)
-    if dbg:
-        print(a)
+        count[j+1] += count[j]
+    for i in range(len(aux)) :
+        aux[count[digit(a[l+i], w)]] = a[l+i]
+        count[digit(a[l+i], w)] += 1
+    for i in range(len(aux)) :
+        a[l+i] = aux[i]
+    radixMSD(a, l, bin(0)-1, w+1, bytesword, digit, M, ins)
+    for j in range(M-1) :
+        radixMSD(a, bin(j), bin(j+1)-1, w+1, bytesword, digit, M, ins)
     return a
 
 # insertion_sort array slices and merge_sorted them
