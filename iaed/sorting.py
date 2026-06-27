@@ -4,8 +4,10 @@
 
     >>> from iaed import sorting
     >>> v = [34, 3, 36, 11, 8, 4, 22, 20, 12]
-    >>> sorting.dbg = True # ver cada iterada
+    >>> sorting.dbg = sorting.prt # usar prt() para ver cada iterada
+    >>> sorting.dbg = True # imprimir cada iterada
     >>> sorting.selection(v)
+
 
     Em algoritmos recursivos pode ser necessário aumentar o limite de recursão:
     >>> from sys import setrecursionlimit
@@ -16,6 +18,15 @@ from timeit import timeit
 
 dbg = False # debug
 ''' para cada iterada colocar a True '''
+
+cnt = 0
+''' contador de iteradas; colocar a zero antes de cada ordenação '''
+
+def prt(alg,vec):
+    ''' usar sorting.dbf = prt para usar esta função em cada iterada '''
+    global cnt
+    print(alg, cnt:=cnt+1, ':', vec)
+    if input("?"): raise ValueError("End")
 
 def run(algorithm, array, pkg = 'iaed.sorting') :
     ''' Execução temporizada
@@ -60,7 +71,8 @@ def bubble0(array) :
             if array[j] > array[j+1] :
                 array[j], array[j+1] = array[j+1], array[j]
         if dbg:
-            print(array)
+            if callable(dbg): dbg("bubble0", array)
+            else: print(array)
     return array
 
 def bubble1(array) :
@@ -71,7 +83,8 @@ def bubble1(array) :
             if array[j] < array[j-1] :
                 array[j], array[j-1] = array[j-1], array[j]
         if dbg:
-            print(array)
+            if callable(dbg): dbg("bubble1", array)
+            else: print(array)
     return array
 
 def bubble(array) :
@@ -86,7 +99,8 @@ def bubble(array) :
         if is_sorted :
             break
         if dbg:
-            print(array)
+            if callable(dbg): dbg("bubble", array)
+            else: print(array)
     return array
 
 def insertion(array) :
@@ -99,7 +113,8 @@ def insertion(array) :
             j -= 1
         array[j + 1] = item
         if dbg:
-            print(array)
+            if callable(dbg): dbg("insertion", array)
+            else: print(array)
     return array
 
 # selection([15,14,12,24,18,11,21,48,32])
@@ -112,7 +127,8 @@ def selection(array) :
                 pos = j
         array[pos], array[i] = array[i], array[pos]
         if dbg:
-            print(array)
+            if callable(dbg): dbg("selection", array)
+            else: print(array)
     return array
 
 def shell(array) :
@@ -131,7 +147,8 @@ def shell(array) :
             array[j] = item
         h //= 3
         if dbg:
-            print(array)
+            if callable(dbg): dbg("shell", array)
+            else: print(array)
     return array
 
 def partition(a, l, r) :
@@ -236,13 +253,15 @@ def heapsort(a, l=0, r=None) :
         r = len(a)-1
     buildheap(a, l, r)
     if dbg:
-        print('build',a)
+        if callable(dbg): dbg("buildheap", a)
+        else: print("buildheap", a)
     while r - l > 0 :
         a[l], a[r] = a[r], a[l]
         r -= 1
         fix_down(a, l, r, l)
         if dbg:
-            print(a)
+            if callable(dbg): dbg("heapsort", a)
+            else: print(a)
     return a
 
 def distcount(a, M=1000) :
@@ -294,7 +313,8 @@ def radixLSD(a, M, bytesword, digit) :
             count[digit(a[i], bytesword)] += 1
         a = list(aux)
         if dbg:
-            print(a)
+            if callable(dbg): dbg("radixLSD", a)
+            else: print(a)
     return a
 
 def quicksortBin(a, l, r, w, bitsword) :
@@ -357,7 +377,9 @@ def radixMSD(a, l, r, w, bytesword, digit, M, ins=32) :
     '''
     def bin(x): return l+count[x]
     if r <= l: return a
-    if dbg: print('radix:', w, 'digit from', l, 'to', r, '=', a[l:r+1])
+    if dbg:
+        if callable(dbg): dbg('radixMSD', w, l, r, a[l:r+1])
+        else: print('radix:', w, 'digit from', l, 'to', r, '=', a[l:r+1])
     if w > bytesword :
         return a
     if r-l <= ins :

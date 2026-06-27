@@ -1,9 +1,10 @@
 PKG=iaed
 ENV=test
-REP=testpypi
+REP=pypi
+#REP=testpypi
 PYTHON=python3
 all::
-	$(PYTHON) -m build # pip install build
+	$(PYTHON) -m build # pip install build twine
 	#$(PYTHON) setup.py sdist bdist_wheel # pip install wheel
 install::
 	$(PYTHON) -m twine upload --repository $(REP) dist/*
