@@ -119,24 +119,34 @@ class AVL(Btree):
             return AVL._balance(node)
         self._tree = _insert(self._tree, self._keyf, value)
 
-    def remove(self, key):
-        ''' Operação de remoção '''
-        def _remove(node, keyf, key):
+    def remove(self, key, left=True):
+        ''' Operação de remoção
+            left=True (default) use the highest value from the left subtree
+            left=False          use the lowest value from the right subtree
+        '''
+        def _remove(node, keyf, key, left):
             ''' Remove o nó com balanceamento '''
             if not node:
                 return None
             cmp = key - keyf(node.value())
             if cmp < 0:
-                node.left(_remove(node.left(), keyf, key))
+                node.left(_remove(node.left(), keyf, key, left))
             elif cmp > 0:
-                node.right(_remove(node.right(), keyf, key))
+                node.right(_remove(node.right(), keyf, key, left))
             else:
                 if node.left() and node.right(): # caso 3
-                    aux = node.left() # find highest value
-                    while aux.right():
-                        aux = aux.right()
-                    aux._value, node._value = node.value(), aux.value()
-                    node.left(_remove(node.left(), keyf, aux.value()))
+                    if left:
+                        aux = node.left() # find highest value
+                        while aux.right():
+                            aux = aux.right()
+                        aux._value, node._value = node.value(), aux.value()
+                        node.left(_remove(node.left(), keyf, aux.value(), left))
+                    else:
+                        aux = node.right() # find lowest value
+                        while aux.left():
+                            aux = aux.left()
+                        aux._value, node._value = node.value(), aux.value()
+                        node.right(_remove(node.right(), keyf, aux.value(), left))
                 else:
                     if not node.left() and not node.right():
                         node = None
@@ -145,7 +155,7 @@ class AVL(Btree):
                     else:
                         node = node.left()
             return AVL._balance(node)
-        self._tree = _remove(self._tree, self._keyf, key)
+        self._tree = _remove(self._tree, self._keyf, key, left)
 
 if __name__ == '__main__':
     t=AVL()

@@ -165,6 +165,28 @@ class Btree:
                 visit(node.value())
                 _inorder(node.right(), visit)
         _inorder(self._tree, visit)
+    def preset(self, vec):
+        ''' constroí uma árvore com base numa sequência preorder '''
+        self._tree = None
+        for i in vec: self.insert(i)
+    def postset(self, vec):
+        ''' constroí uma árvore com base numa sequência posorder '''
+        self.preset(v[::-1])
+    def heap(self, visit = print, width = 78):
+        ''' return the heap vector of a tree '''
+        l = [None] * (2 ** self.height() - 1)
+        def _heap(node, vec, pos):
+            if node:
+                vec[pos] = node.value()
+                _heap(node.left(), vec, 2*pos+1)
+                _heap(node.right(), vec, 2*(pos+1))
+        _heap(self._tree, l, 0)
+        return l
+    def __repr__(self):
+        def _repr(node, lev):
+            return "\n"+" "*(2*lev) + str(node.value()) + _repr(node.left(), lev+1) + _repr(node.right(), lev+1) if node else ""
+        return _repr(self._tree, 0)
+
 
 if __name__ == '__main__':
     x = Btree()

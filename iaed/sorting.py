@@ -63,7 +63,7 @@ def mkstrvec(length, width, chars = charset):
     ''' Cria um vetor de cadeias de carateres '''
     return [ rndstr(width, chars) for _ in range(length) ]
 
-def bubble0(array) :
+def bubble0(array, iter = -1) :
     ''' Ordenação por borbulhamento (esq -> dir)'''
     n = len(array)
     for i in range(n) :
@@ -73,9 +73,11 @@ def bubble0(array) :
         if dbg:
             if callable(dbg): dbg("bubble0", array)
             else: print(array)
+        iter -= 1
+        if iter == 0: break
     return array
 
-def bubble1(array) :
+def bubble1(array, iter = -1) :
     ''' Ordenação por borbulhamento invertido (dir -> esq)'''
     n = len(array) -1
     for i in range(n) :
@@ -85,9 +87,11 @@ def bubble1(array) :
         if dbg:
             if callable(dbg): dbg("bubble1", array)
             else: print(array)
+        iter -= 1
+        if iter == 0: break
     return array
 
-def bubble(array) :
+def bubble(array, iter = -1) :
     ''' Ordenação por borbulhamento ótimizado (esq -> dir)'''
     n = len(array)
     for i in range(n) :
@@ -101,9 +105,11 @@ def bubble(array) :
         if dbg:
             if callable(dbg): dbg("bubble", array)
             else: print(array)
+        iter -= 1
+        if iter == 0: break
     return array
 
-def insertion(array) :
+def insertion(array, iter = -1) :
     ''' Ordenação por inserção '''
     for i in range(1, len(array)) :
         item = array[i]
@@ -115,10 +121,12 @@ def insertion(array) :
         if dbg:
             if callable(dbg): dbg("insertion", array)
             else: print(array)
+        iter -= 1
+        if iter == 0: break
     return array
 
 # selection([15,14,12,24,18,11,21,48,32])
-def selection(array) :
+def selection(array, iter = -1) :
     ''' Ordenação por seleção '''
     for i in range(len(array)) :
         pos = i
@@ -129,9 +137,11 @@ def selection(array) :
         if dbg:
             if callable(dbg): dbg("selection", array)
             else: print(array)
+        iter -= 1
+        if iter == 0: break
     return array
 
-def shell(array) :
+def shell(array, iter = -1) :
     ''' Ordenação Shell '''
     h = 1
     while h <= len(array) // 9 :
@@ -149,6 +159,8 @@ def shell(array) :
         if dbg:
             if callable(dbg): dbg("shell", array)
             else: print(array)
+        iter -= 1
+        if iter == 0: break
     return array
 
 def partition(a, l, r) :
@@ -247,7 +259,7 @@ def buildheap(a, l=0, r=None) :
     while k >= l :
         fix_down(a, l, r, l+k)
         k -= 1
-def heapsort(a, l=0, r=None) :
+def heapsort(a, l=0, r=None, iter = -1) :
     ''' Ordenação por amontoado '''
     if r is None :
         r = len(a)-1
@@ -262,6 +274,8 @@ def heapsort(a, l=0, r=None) :
         if dbg:
             if callable(dbg): dbg("heapsort", a)
             else: print(a)
+        iter -= 1
+        if iter == 0: break
     return a
 
 def distcount(a, M=1000) :
@@ -290,7 +304,7 @@ def distcount2(a, M=1000) :
         b[cnt[a[i]]] = a[i]
     return b
 
-def radixLSD(a, M, bytesword, digit) :
+def radixLSD(a, M, bytesword, digit, iter = -1) :
     ''' Ordenação radix Least Significant Digit (LSD) first
 
     sort a vector of two (2) decimal (10) digits:
@@ -315,6 +329,8 @@ def radixLSD(a, M, bytesword, digit) :
         if dbg:
             if callable(dbg): dbg("radixLSD", a)
             else: print(a)
+        iter -= 1
+        if iter == 0: break
     return a
 
 def quicksortBin(a, l, r, w, bitsword) :
